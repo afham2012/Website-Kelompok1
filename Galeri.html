@@ -1,11 +1,384 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Porsche - Galeri & Spesifikasi Model Legendaris</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            border-bottom: 3px solid #d50000;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #d50000;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ffffff;
+            background-color: #d50000;
+        }
+
+        /* Gallery Main Section */
+        main {
+            flex: 1;
+            padding: 60px 50px;
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: #aaaaaa;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Gallery Grid Layout */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-card {
+            background: #161616;
+            border: 1px solid #262626;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-8px);
+            border-color: #d50000;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #262626;
+        }
+
+        .card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .card-content h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: rgba(213, 0, 0, 0.2);
+            color: #ff4d4d;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+
+        .card-content p {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Specs Section inside Card */
+        .specs-box {
+            background: #0f0f0f;
+            border: 1px solid #222;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: auto;
+        }
+
+        .specs-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #d50000;
+            font-weight: 700;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 4px;
+        }
+
+        .specs-list {
+            list-style: none;
+            font-size: 12px;
+            color: #ccc;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .specs-list li span {
+            color: #777;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #1a1a1a;
+            margin-top: auto;
+        }
+
+        /* Responsive Mobile Adjustments */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            main {
+                padding: 30px 20px;
+            }
+            nav ul {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+
+    <header>
+        <a href="index.html" class="logo">PORSCHE<span>.</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="Best - seller.html">Mobil Best Seller</a></li>
+                <li><a href="galeri.html" class="active">Galeri</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="section-header">
+            <h1 class="section-title">Galeri & Spesifikasi Mobil Legendaris</h1>
+            <p class="section-subtitle">Menampilkan deretan mahakarya ikonik Porsche lengkap dengan spesifikasi performa mesin andalan mereka.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- Card 1: 911 -->
+            <div class="gallery-card">
+                <!-- Foto Porsche 911 -->
+                <img src="911.jpg" alt="Porsche 911" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag">Ikon Legendaris</span>
+                    <h3>Porsche 911 Carrera</h3>
+                    <p>Mobil sport paling ikonik di dunia dengan desain mesin belakang berkarakter khas yang tidak pernah lekang oleh waktu.</p>
+                    
+                    <div class="specs-box">
+                        <div class="specs-title">Spesifikasi Mesin</div>
+                        <ul class="specs-list">
+                            <li><span>Tipe:</span> 3.0L Twin-Turbocharged Boxer 6</li>
+                            <li><span>Tenaga:</span> 379 HP - 640 HP (Varian Turbo)</li>
+                            <li><span>Akselerasi:</span> 0-100 km/jam dalam 4.2 detik</li>
+                            <li><span>Kecepatan Maks:</span> 293 km/jam</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Taycan -->
+            <div class="gallery-card">
+                <!-- Foto Porsche Taycan -->
+                <img src="taycan.jpg" alt="Porsche Taycan" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag">Full Elektrik</span>
+                    <h3>Porsche Taycan Turbo S</h3>
+                    <p>Sportscar listrik murni pertama dari Porsche yang mendefinisikan ulang era performa tinggi ramah lingkungan.</p>
+                    
+                    <div class="specs-box">
+                        <div class="specs-title">Spesifikasi Motor Elektrik</div>
+                        <ul class="specs-list">
+                            <li><span>Tipe:</span> Dual Permanent Magnet Synchronous</li>
+                            <li><span>Tenaga:</span> Hingga 750 HP (Overboost)</li>
+                            <li><span>Akselerasi:</span> 0-100 km/jam dalam 2.8 detik</li>
+                            <li><span>Jarak Tempuh:</span> Hingga 450+ km (WLTP)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Cayenne -->
+            <div class="gallery-card">
+                <!-- Foto Porsche Cayenne -->
+                <img src="Cayenne.jpg" alt="Porsche Cayenne" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag">Luxury SUV</span>
+                    <h3>Porsche Cayenne GTS</h3>
+                    <p>SUV mewah berperforma tinggi yang menggabungkan kenyamanan keluarga dengan DNA kecepatan trek balap.</p>
+                    
+                    <div class="specs-box">
+                        <div class="specs-title">Spesifikasi Mesin</div>
+                        <ul class="specs-list">
+                            <li><span>Tipe:</span> 4.0L Twin-Turbocharged V8</li>
+                            <li><span>Tenaga:</span> 493 HP / 660 Nm</li>
+                            <li><span>Akselerasi:</span> 0-100 km/jam dalam 4.4 detik</li>
+                            <li><span>Kecepatan Maks:</span> 270 km/jam</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Panamera -->
+            <div class="gallery-card">
+                <!-- Foto Porsche Panamera -->
+                <img src="canamera.jpg" alt="Porsche Panamera" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag">Executive Sedan</span>
+                    <h3>Porsche Panamera 4</h3>
+                    <p>Sedan sport mewah 4-pintu yang menawarkan kemewahan eksekutif dipadukan akselerasi bertenaga buas.</p>
+                    
+                    <div class="specs-box">
+                        <div class="specs-title">Spesifikasi Mesin</div>
+                        <ul class="specs-list">
+                            <li><span>Tipe:</span> 2.9L Twin-Turbocharged V6</li>
+                            <li><span>Tenaga:</span> 348 HP / 500 Nm</li>
+                            <li><span>Akselerasi:</span> 0-100 km/jam dalam 5.0 detik</li>
+                            <li><span>Kecepatan Maks:</span> 270 km/jam</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: 718 Cayman -->
+            <div class="gallery-card">
+                <!-- Foto Porsche 718 Cayman -->
+                <img src="porsche caymaan.jpg" alt="Porsche 718 Cayman" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag">Mid-Engine Sport</span>
+                    <h3>Porsche 718 Cayman</h3>
+                    <p>Mobil sport mesin tengah (*mid-engine*) yang terkenal lincah dan memberikan keseimbangan distribusi bobot sempurna.</p>
+                    
+                    <div class="specs-box">
+                        <div class="specs-title">Spesifikasi Mesin</div>
+                        <ul class="specs-list">
+                            <li><span>Tipe:</span> 2.0L Turbocharged Boxer 4</li>
+                            <li><span>Tenaga:</span> 300 HP / 380 Nm</li>
+                            <li><span>Akselerasi:</span> 0-100 km/jam dalam 4.9 detik</li>
+                            <li><span>Kecepatan Maks:</span> 275 km/jam</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Macan -->
+            <div class="gallery-card">
+                <!-- Foto Porsche Macan -->
+                <img src="macan.jpg" alt="Porsche Macan" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag">Compact SUV</span>
+                    <h3>Porsche Macan GTS</h3>
+                    <p>SUV kompak terlaris yang dirancang untuk dinamika berkendara lincah di perkotaan maupun medan menantang.</p>
+                    
+                    <div class="specs-box">
+                        <div class="specs-title">Spesifikasi Mesin</div>
+                        <ul class="specs-list">
+                            <li><span>Tipe:</span> 2.9L Twin-Turbocharged V6</li>
+                            <li><span>Tenaga:</span> 434 HP / 550 Nm</li>
+                            <li><span>Akselerasi:</span> 0-100 km/jam dalam 4.3 detik</li>
+                            <li><span>Kecepatan Maks:</span> 272 km/jam</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Porsche Indonesia. Hak Cipta Dilindungi Undang-Undang.</p>
+    </footer>
+
 </body>
 </html>
