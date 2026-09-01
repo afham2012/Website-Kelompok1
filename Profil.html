@@ -1,11 +1,274 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profil Perusahaan - Porsche AG</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            border-bottom: 3px solid #d50000;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: #d50000;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ffffff;
+            background-color: #d50000;
+        }
+
+        /* Main Content Layout */
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-card {
+            background: #161616;
+            border: 1px solid #262626;
+            border-top: 4px solid #d50000;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #ffffff;
+            border-bottom: 1px solid #262626;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-left: 4px solid #d50000;
+            padding-left: 12px;
+            text-transform: uppercase;
+        }
+
+        p {
+            color: #aaaaaa;
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Stats Grid Layout */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-box {
+            background: #0f0f0f;
+            border: 1px solid #262626;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            border-color: #d50000;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 28px;
+            font-weight: 800;
+            color: #d50000;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Profile List Styles */
+        ul.profile-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.profile-list li {
+            background: #0f0f0f;
+            border: 1px solid #262626;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            color: #aaaaaa;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        ul.profile-list li:hover {
+            border-color: #d50000;
+            padding-left: 24px;
+            color: #ffffff;
+        }
+
+        ul.profile-list strong {
+            color: #ffffff;
+        }
+
+        ul.profile-list em {
+            color: #d50000;
+            font-style: normal;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+            border-top: 1px solid #1a1a1a;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+            .content-card {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+
+    <header>
+        <div class="logo">PORSCHE<span>.</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="profil.html" class="active">Profil</a></li>
+                <li><a href="Best - seller.html">Mobil Best Seller</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-card">
+            <h1>Profil Perusahaan</h1>
+            <p><strong>Porsche AG</strong> (Dr. Ing. h.c. F. Porsche AG) adalah produsen otomotif mewah asal Jerman yang terkenal dengan manufaktur mobil sport performa tinggi, SUV, dan sedan premium.</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">1931</span>
+                    <span class="stat-label">Tahun Berdiri</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">19x</span>
+                    <span class="stat-label">Juara Le Mans</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">356</span>
+                    <span class="stat-label">Model Pertama</span>
+                </div>
+            </div>
+
+            <h2>Ringkasan Profil Perusahaan</h2>
+            <ul class="profile-list">
+                <li><strong>Pendiri:</strong> Ferdinand Porsche</li>
+                <li><strong>Tahun Berdiri:</strong> 1931 (Stuttgart, Jerman)</li>
+                <li><strong>Kantor Pusat:</strong> Zuffenhausen, Stuttgart, Jerman</li>
+                <li><strong>Induk Perusahaan:</strong> Volkswagen Group</li>
+                <li><strong>Spesialisasi:</strong> Mobil sport performa tinggi, kendaraan listrik (EV), SUV mewah</li>
+            </ul>
+
+            <h2>Sejarah Singkat</h2>
+            <p>Ferdinand Porsche mendirikan perusahaan ini sebagai kantor konsultasi rekayasa dan desain mesin otomotif. Mobil pertama yang mengusung nama Porsche secara resmi adalah <strong>Porsche 356</strong> yang diperkenalkan pada tahun 1948 oleh putra Ferdinand, yaitu Ferdinand "Ferry" Porsche.</p>
+
+            <h2>Ciri Khas & Keunggulan</h2>
+            <ul class="profile-list">
+                <li><strong>Filosofi Desain Ikonik:</strong> Pertahanan siluet aerodinamis yang terus dipertahankan dan diperbarui dari generasi ke generasi.</li>
+                <li><strong>Dominasi Arena Balap:</strong> Porsche memegang rekor kemenangan terbanyak dalam ajang balap ketahanan paling bergengsi di dunia, <em>24 Hours of Le Mans</em>.</li>
+                <li><strong>Keandalan Tinggi:</strong> Selain fokus pada performa mesin dan kecepatan, Porsche dikenal memiliki daya tahan rakitan yang sangat baik untuk penggunaan harian.</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Porsche Indonesia. Hak Cipta Dilindungi Undang-Undang.</p>
+    </footer>
+
 </body>
 </html>
