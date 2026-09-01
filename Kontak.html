@@ -1,11 +1,376 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kontak - Porsche Indonesia</title>
+    
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0b0b0b;
+            --card-bg: #161616;
+            --accent-red: #d50000;
+            --accent-red-hover: #b30000;
+            --text-main: #ffffff;
+            --text-sub: #cccccc;
+            --text-muted: #888888;
+            --border-color: #262626;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: rgba(0, 0, 0, 0.95);
+            border-bottom: 3px solid var(--accent-red);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 8px 14px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text-main);
+            background-color: var(--accent-red);
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(11,11,11,1) 100%), 
+                        url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-banner h1 {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .hero-banner p {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Main Content Layout */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background-color: var(--accent-red);
+        }
+
+        /* Emergency Support Banner */
+        .assistance-banner {
+            background: linear-gradient(135deg, #1f1111 0%, #161616 100%);
+            border: 1px solid var(--accent-red);
+            border-radius: 8px;
+            padding: 25px 30px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .assistance-text h3 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .assistance-text p {
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+
+        .assistance-btn {
+            background-color: var(--accent-red);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: background 0.3s ease;
+        }
+
+        .assistance-btn:hover {
+            background-color: var(--accent-red-hover);
+        }
+
+        /* Dealers Grid Section */
+        .dealers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .dealer-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dealer-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-red);
+        }
+
+        .dealer-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .dealer-info {
+            font-size: 14px;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            width: 100px;
+            color: var(--text-muted);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .info-val a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .info-val a:hover {
+            color: var(--accent-red);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            text-align: center;
+            padding: 25px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid #1a1a1a;
+            margin-top: 60px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            nav a {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            .hero-banner h1 {
+                font-size: 32px;
+            }
+
+            .dealers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+
+    <header>
+        <div class="logo">PORSCHE<span>.</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="Best - seller.html">Mobil Best Seller</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="kontak.html" class="active">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero-banner">
+        <h1>Hubungi Kami</h1>
+        <p>Apakah Anda memiliki pertanyaan mengenai model terbaru, reservasi uji kemudi, atau layanan purna jual? Tim Porsche Indonesia siap membantu Anda.</p>
+    </div>
+
+    <main>
+
+        <!-- Official Porsche Centre Dealer Network -->
+        <div class="section-header">
+            <h2>Porsche Centre Network</h2>
+        </div>
+
+        <div class="dealers-grid">
+            <!-- Porsche Centre Jakarta -->
+            <div class="dealer-card">
+                <div>
+                    <div class="dealer-title">Porsche Centre Jakarta</div>
+                    <div class="dealer-info">
+                        <div class="info-row">
+                            <span class="info-label">Alamat</span>
+                            <span class="info-val">Jl. Sultan Iskandar Muda No. 51, Arteri Pondok Indah, Jakarta Selatan 12240</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Telepon</span>
+                            <span class="info-val"><a href="tel:+62217258000">+62 21 725 8000</a></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Email</span>
+                            <span class="info-val"><a href="mailto:info@porsche-jakarta.co.id">info@porsche-jakarta.co.id</a></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Jam Buka</span>
+                            <span class="info-val">Senin – Jumat: 08.30 – 18.00<br>Sabtu: 08.30 – 15.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Porsche Centre Surabaya -->
+            <div class="dealer-card">
+                <div>
+                    <div class="dealer-title">Porsche Centre Surabaya</div>
+                    <div class="dealer-info">
+                        <div class="info-row">
+                            <span class="info-label">Alamat</span>
+                            <span class="info-val">Jl. Adityawarman No. 41, Sawunggaling, Wonokromo, Surabaya 60242</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Telepon</span>
+                            <span class="info-val"><a href="tel:+62315465317">+62 31 546 5317</a></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Email</span>
+                            <span class="info-val"><a href="mailto:info@porsche-surabaya.co.id">info@porsche-surabaya.co.id</a></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Jam Buka</span>
+                            <span class="info-val">Senin – Jumat: 08.30 – 18.00<br>Sabtu: 08.30 – 15.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Porsche Indonesia. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p>Dibuat oleh: Kahlil.M.Nadhytia</p>
+    </footer>
+
 </body>
 </html>
