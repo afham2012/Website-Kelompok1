@@ -7,6 +7,14 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
 
+    :root {
+      --primary-red: #e50000;
+      --primary-red-hover: #b30000;
+      --bg-dark: #080808;
+      --text-main: #ffffff;
+      --text-muted: #aaaaaa;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -15,17 +23,19 @@
     }
 
     body {
-      background-color: #0b0b0b;
-      color: #ffffff;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Navigation Bar */
     header {
-      background-color: rgba(0, 0, 0, 0.95);
-      border-bottom: 3px solid #d50000;
+      background-color: rgba(8, 8, 8, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--primary-red);
       padding: 20px 50px;
       display: flex;
       justify-content: space-between;
@@ -38,19 +48,19 @@
     .logo {
       font-size: 24px;
       font-weight: 900;
-      letter-spacing: 5px;
-      color: #fff;
+      letter-spacing: 4px;
+      color: var(--text-main);
       text-transform: uppercase;
     }
 
     .logo span {
-      color: #d50000;
+      color: var(--primary-red);
     }
 
     nav ul {
       display: flex;
       list-style: none;
-      gap: 25px;
+      gap: 15px;
     }
 
     nav a {
@@ -59,15 +69,16 @@
       font-weight: 600;
       font-size: 14px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      padding: 8px 12px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     nav a:hover, nav a.active {
-      color: #ffffff;
-      background-color: #d50000;
+      color: var(--text-main);
+      background-color: var(--primary-red);
+      box-shadow: 0 4px 15px rgba(229, 0, 0, 0.3);
     }
 
     /* Main Container */
@@ -79,54 +90,77 @@
       width: 100%;
     }
 
-    /* Review Card with Glassmorphism */
+    /* Animation */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Review Card */
     .review-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .image-container {
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
     }
 
     .hero-image {
       width: 100%;
-      height: 380px;
+      height: 100%;
       object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .review-card:hover .hero-image {
+      transform: scale(1.05);
     }
 
     .content-padding {
-      padding: 40px;
+      padding: 45px;
     }
 
     .badge {
       display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: #d50000;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      color: var(--primary-red);
+      background: rgba(229, 0, 0, 0.1);
+      padding: 6px 12px;
+      border-radius: 4px;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     h1 {
-      font-size: 36px;
+      font-size: clamp(28px, 4vw, 42px);
       font-weight: 800;
       letter-spacing: -0.5px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      line-height: 1.2;
     }
 
     .subtitle {
       font-size: 16px;
-      color: #aaaaaa;
-      margin-bottom: 30px;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+      font-weight: 400;
     }
 
     .review-text {
-      color: #dddddd;
+      color: #dfdfdf;
       line-height: 1.8;
-      font-size: 15px;
-      margin-bottom: 35px;
+      font-size: 16px;
+      margin-bottom: 40px;
     }
 
     /* Specifications Grid */
@@ -134,33 +168,41 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 25px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.4);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
       margin-bottom: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    .specs-grid:hover {
+      background: rgba(0, 0, 0, 0.5);
     }
 
     .spec-item {
       display: flex;
       flex-direction: column;
+      border-left: 3px solid var(--primary-red);
+      padding-left: 15px;
     }
 
     .spec-label {
-      font-size: 11px;
-      color: #888888;
+      font-size: 12px;
+      color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
+      font-weight: 600;
     }
 
     .spec-value {
-      font-size: 18px;
-      font-weight: 700;
-      color: #ffffff;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
     }
 
-    /* Navigation Link Button */
+    /* Buttons */
     .btn-container {
       display: flex;
       gap: 15px;
@@ -171,47 +213,167 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 28px;
-      font-size: 13px;
+      padding: 16px 32px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       text-decoration: none;
-      border-radius: 6px;
-      transition: all 0.3s ease;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .btn-primary {
-      background-color: #d50000;
-      color: #ffffff;
-      border: 1px solid #d50000;
+      background-color: var(--primary-red);
+      color: var(--text-main);
+      border: 1px solid var(--primary-red);
+      box-shadow: 0 8px 25px rgba(229, 0, 0, 0.25);
     }
 
     .btn-primary:hover {
-      background-color: #b30000;
-      box-shadow: 0 0 20px rgba(213, 0, 0, 0.5);
+      background-color: var(--primary-red-hover);
+      box-shadow: 0 8px 25px rgba(229, 0, 0, 0.5);
+      transform: translateY(-2px);
     }
 
     .btn-secondary {
       background-color: transparent;
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .btn-secondary:hover {
-      border-color: #ffffff;
-      background-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--text-main);
+      background-color: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+    
+    .w-100 {
+      width: 100%;
+    }
+
+    /* Modal Form Styles */
+    .modal {
+      display: none; 
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 40px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal.show .modal-content {
+      transform: translateY(0);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: var(--text-muted);
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: var(--primary-red);
+    }
+
+    .modal h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .modal p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: white;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: var(--primary-red);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     /* Footer */
     footer {
       background-color: #050505;
       text-align: center;
-      padding: 20px;
-      font-size: 12px;
+      padding: 25px;
+      font-size: 13px;
       color: #666;
-      border-top: 1px solid #1a1a1a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       margin-top: auto;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .image-container {
+        height: 250px;
+      }
+
+      .content-padding {
+        padding: 25px;
+      }
+      
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -232,10 +394,12 @@
 
   <main>
     <div class="review-card">
-      <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=1200&q=80" alt="Porsche 911 GTS T-Hybrid" class="hero-image">
+      <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=1200&q=80" alt="Porsche 911 GTS T-Hybrid" class="hero-image">
+      </div>
       
       <div class="content-padding">
-        <span class="badge">EKSKLUSIF REVIEW</span>
+        <span class="badge">Eksklusif Review</span>
         <h1>Porsche 911 Carrera GTS</h1>
         <p class="subtitle">Generasi 992.2 – Mahakarya Performa & Teknologi T-Hybrid</p>
 
@@ -245,7 +409,6 @@
           <p>Penanganan presisi di tikungan, interior digital yang ergonomis, serta aerodinamika aktif menjadikan Porsche 911 tetap menjadi pilihan utama bagi para pecinta kecepatan yang mendambakan kenyamanan berkendara harian.</p>
         </div>
 
-        <!-- Spesifikasi Singkat -->
         <div class="specs-grid">
           <div class="spec-item">
             <span class="spec-label">Mesin</span>
@@ -265,18 +428,74 @@
           </div>
         </div>
 
-        <!-- Tombol Link -->
         <div class="btn-container">
           <a href="Best - seller.html" class="btn btn-primary">&larr; Kembali ke Best Seller</a>
-          <a href="kontak.html" class="btn btn-secondary">Jadwalkan Test Drive</a>
+          <button id="openModalBtn" class="btn btn-secondary">Jadwalkan Test Drive</button>
         </div>
       </div>
     </div>
   </main>
 
+  <div id="testDriveModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModalBtn">&times;</span>
+      <h2>Jadwalkan Test Drive</h2>
+      <p>Isi detail Anda di bawah ini dan tim kami akan segera menghubungi Anda untuk konfirmasi jadwal.</p>
+      
+      <form id="testDriveForm">
+        <div class="form-group">
+          <input type="text" placeholder="Nama Lengkap" required>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Alamat Email" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="Nomor Telepon / WhatsApp" required>
+        </div>
+        <div class="form-group">
+          <input type="date" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Kirim Jadwal</button>
+      </form>
+    </div>
+  </div>
+
   <footer>
     <p>&copy; 2026 Porsche Indonesia. Hak Cipta Dilindungi Undang-Undang.</p>
+    <p>Dibuat oleh: Regan</p>
   </footer>
+
+  <script>
+    const modal = document.getElementById("testDriveModal");
+    const openBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.getElementById("closeModalBtn");
+    const form = document.getElementById("testDriveForm");
+
+    // Fungsi membuka modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.add("show");
+    });
+
+    // Fungsi menutup modal (lewat tombol X)
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("show");
+    });
+
+    // Fungsi menutup modal jika klik di luar kotak form
+    window.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.remove("show");
+      }
+    });
+
+    // Fungsi saat form disubmit
+    form.addEventListener("submit", (e) => {
+      e.preventDefault(); // Mencegah reload halaman
+      alert("Terima kasih! Jadwal Test Drive Anda untuk Porsche 911 telah kami terima. Tim kami akan segera menghubungi Anda.");
+      modal.classList.remove("show");
+      form.reset(); // Mengosongkan form
+    });
+  </script>
 
 </body>
 </html>
