@@ -224,6 +224,11 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* Efek saat tombol diklik/ditekan agar lebih realistis */
+    .btn:active {
+      transform: scale(0.95) !important;
+    }
+
     .btn-primary {
       background-color: var(--primary-red);
       color: var(--text-main);
@@ -253,7 +258,7 @@
       width: 100%;
     }
 
-    /* Modal Form Styles */
+    /* Modal Form Styles - UPDATED DENGAN ANIMASI */
     .modal {
       display: none; 
       position: fixed;
@@ -262,19 +267,19 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
+      background-color: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
     }
 
+    /* Animasi background saat muncul */
     .modal.show {
       display: flex;
-      opacity: 1;
+      animation: fadeInBg 0.4s ease forwards;
     }
 
+    /* Animasi kotak modal saat muncul (Pop-up mantul) */
     .modal-content {
       background: #111111;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -283,13 +288,39 @@
       width: 90%;
       max-width: 500px;
       position: relative;
-      transform: translateY(-20px);
-      transition: transform 0.3s ease;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+      opacity: 0;
     }
 
     .modal.show .modal-content {
-      transform: translateY(0);
+      animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      animation-delay: 0.1s;
+    }
+
+    /* Animasi saat modal ditutup (Pop-down dan Fade-out) */
+    .modal.hide {
+      animation: fadeOutBg 0.3s ease forwards;
+    }
+    .modal.hide .modal-content {
+      animation: popDown 0.3s ease forwards;
+    }
+
+    /* Kumpulan Keyframes Animasi */
+    @keyframes fadeInBg {
+      from { background-color: rgba(0, 0, 0, 0); backdrop-filter: blur(0px); }
+      to { background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); }
+    }
+    @keyframes fadeOutBg {
+      from { background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); }
+      to { background-color: rgba(0, 0, 0, 0); backdrop-filter: blur(0px); }
+    }
+    @keyframes popUp {
+      0% { opacity: 0; transform: scale(0.8) translateY(40px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes popDown {
+      0% { opacity: 1; transform: scale(1) translateY(0); }
+      100% { opacity: 0; transform: scale(0.9) translateY(20px); }
     }
 
     .close-btn {
@@ -429,7 +460,6 @@
         </div>
 
         <div class="btn-container">
-          <!-- Mengubah href ke index.html dan teksnya menjadi Kembali ke Beranda -->
           <a href="index.html" class="btn btn-primary">&larr; Kembali ke Beranda</a>
           <button id="openModalBtn" class="btn btn-secondary">Jadwalkan Test Drive</button>
         </div>
@@ -472,20 +502,32 @@
     const closeBtn = document.getElementById("closeModalBtn");
     const form = document.getElementById("testDriveForm");
 
-    // Fungsi membuka modal
+    // Fungsi membuka modal dengan animasi
     openBtn.addEventListener("click", () => {
+      modal.classList.remove("hide"); // Pastikan class hide terhapus jika ada
       modal.classList.add("show");
+      document.body.style.overflow = "hidden"; // Cegah web di-scroll saat modal terbuka
     });
 
-    // Fungsi menutup modal (lewat tombol X)
-    closeBtn.addEventListener("click", () => {
-      modal.classList.remove("show");
-    });
+    // Fungsi untuk menutup modal dengan delay animasi
+    const closeModal = () => {
+      modal.classList.add("hide"); // Memicu animasi penutupan
+      
+      // Tunggu 300ms sesuai durasi animasi CSS sebelum disembunyikan total
+      setTimeout(() => {
+        modal.classList.remove("show");
+        modal.classList.remove("hide");
+        document.body.style.overflow = "auto"; // Kembalikan fungsi scroll
+      }, 300);
+    };
 
-    // Fungsi menutup modal jika klik di luar kotak form
+    // Saat tombol "X" diklik
+    closeBtn.addEventListener("click", closeModal);
+
+    // Saat mengklik di luar kotak modal form
     window.addEventListener("click", (event) => {
       if (event.target === modal) {
-        modal.classList.remove("show");
+        closeModal();
       }
     });
 
@@ -493,8 +535,8 @@
     form.addEventListener("submit", (e) => {
       e.preventDefault(); // Mencegah reload halaman
       alert("Terima kasih! Jadwal Test Drive Anda untuk Porsche 911 telah kami terima. Tim kami akan segera menghubungi Anda.");
-      modal.classList.remove("show");
-      form.reset(); // Mengosongkan form
+      closeModal(); // Menutup modal dengan animasi
+      form.reset(); // Mengosongkan form kembali
     });
   </script>
 
